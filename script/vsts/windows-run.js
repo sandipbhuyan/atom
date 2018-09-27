@@ -24,14 +24,16 @@ async function runScriptForBuildArch () {
     const runScript = `@echo off\r\nCALL ${extractedNodePath}\\nodevars.bat\r\nCALL ${path.resolve(process.argv[2])} ${process.argv.splice(3).join(' ')}`
     const runScriptPath = 'c:\\tmp\\run.cmd'
     fs.writeFileSync(runScriptPath, runScript)
-    childProcess.execSync(
-      `C:\\Windows\\SysWOW64\\cmd.exe /c "${runScriptPath}"`,
+    childProcess.spawnSync(
+      'C:\\Windows\\SysWOW64\\cmd.exe',
+      ['/c', `"${runScriptPath}"`],
       { env: process.env, stdio: 'inherit' }
     )
   } else {
     if (process.argv.length > 2) {
-      childProcess.execSync(
-        process.argv.splice(2).join(' '),
+      childProcess.spawnSync(
+        process.argv[2],
+        process.argv.splice(3),
         { env: process.env, stdio: 'inherit' }
       )
     }
