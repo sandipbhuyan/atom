@@ -26,7 +26,7 @@ async function runScriptForBuildArch () {
     fs.writeFileSync(runScriptPath, runScript)
     childProcess.spawnSync(
       'C:\\Windows\\SysWOW64\\cmd.exe',
-      ['/c', `"${runScriptPath}"`],
+      ['/C', runScriptPath],
       { env: process.env, stdio: 'inherit' }
     )
   } else {
