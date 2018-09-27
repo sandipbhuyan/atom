@@ -12,10 +12,10 @@ describe('parseCommandLine', () => {
     })
   })
 
-  describe('when --uri-handler is passed', () => {
+  describe.only('when --uri-handler is passed', () => {
     it('ignores other arguments and limits to one URL', () => {
       const args = parseCommandLine(['-d', '--uri-handler', '--safe', '--test', '/some/path', 'atom://test/url', 'atom://other/url'])
-      assert.isUndefined(args.devMode)
+      assert.isUndefined(true)
       assert.isUndefined(args.safeMode)
       assert.isUndefined(args.test)
       assert.deepEqual(args.urlsToOpen, ['atom://test/url'])
